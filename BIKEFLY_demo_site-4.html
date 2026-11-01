@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIKEFLY — Demonstração</title>
+<style>
+:root{--bg:#08090b;--panel:#121519;--panel2:#191e23;--silver:#c6cbd1;--muted:#89919a;--line:#30363d;--white:#f5f7f9}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -10%,#303840 0,#101317 38%,#08090b 75%);color:var(--white);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+header{height:76px;border-bottom:1px solid #30363d;background:#090b0edb;display:flex;align-items:center;justify-content:space-between;padding:0 max(6vw,22px);position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.brand{font-size:25px;font-weight:900;letter-spacing:3px}.brand span{color:var(--silver)}.tag{color:var(--muted);font-size:12px;letter-spacing:2px}
+main{width:min(1050px,92vw);margin:42px auto 70px}.hero{text-align:center;margin:30px auto 34px}.eyebrow{color:#aeb5bd;font-size:11px;letter-spacing:4px;text-transform:uppercase}.hero h1{font-size:clamp(34px,7vw,58px);margin:12px 0 10px;letter-spacing:2px}.hero h1 span{color:#aeb5bd}.hero p{color:var(--muted);line-height:1.6;margin:0 auto;max-width:550px}
+.panel{background:linear-gradient(145deg,#171c21,#0f1216);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);box-shadow:0 22px 70px #0008}
+.screen{display:none}.screen.active{display:block}.center{text-align:center}.section-title{font-size:23px;margin:0 0 8px}.sub{color:var(--muted);font-size:14px;line-height:1.5;margin:0 0 24px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.choice{border:1px solid #414951;background:#14191e;border-radius:17px;padding:24px 18px;text-align:left;color:var(--white);cursor:pointer;transition:.2s}.choice:hover{border-color:#d2d7dd;transform:translateY(-3px);background:#20262c}.emoji{font-size:34px;display:block;margin-bottom:15px}.choice strong{font-size:19px;display:block;margin-bottom:7px}.choice small{color:var(--muted);line-height:1.5}
+button,.btn{border:0;border-radius:11px;background:linear-gradient(135deg,#e0e4e8,#929ba4);color:#101316;font-weight:800;padding:13px 18px;cursor:pointer;font-size:14px}.btn.secondary,button.secondary{background:#20262c;color:#dce1e6;border:1px solid #414951}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}label{display:block;color:#b9c0c7;font-size:12px;margin-bottom:7px}input,select,textarea{width:100%;background:#090c0f;border:1px solid #394149;border-radius:10px;padding:13px;color:white;font-size:14px;outline:none}input:focus,select:focus{border-color:#c4cbd2}.full{grid-column:1/-1}.notice{background:#242a30;border-left:3px solid #c4cbd2;padding:12px 14px;border-radius:8px;color:#c3cbd2;font-size:12px;line-height:1.5;margin:16px 0}
+.topline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.pill{font-size:11px;color:#d1d6dc;border:1px solid #505860;padding:7px 10px;border-radius:30px}
+.dashboard{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.tile{background:#0c1013;border:1px solid #30383f;border-radius:15px;padding:18px}.tile h3{margin:0 0 9px;font-size:16px}.tile p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.big{font-size:28px;font-weight:900;margin:8px 0}.steps{padding-left:18px;color:#c2c9cf;font-size:13px;line-height:2}.success{color:#dce4e9;font-size:13px;background:#20282e;border-radius:10px;padding:12px;margin-top:14px;display:none}
+footer{text-align:center;color:#68717a;font-size:11px;padding:0 20px 30px;letter-spacing:1px}
+@media(max-width:650px){header{height:65px}.tag{display:none}.cards,.dashboard,form{grid-template-columns:1fr}.full{grid-column:auto}.hero{margin-top:20px}.panel{padding:20px}}
+</style>
+</head>
+<body>
+<header><div class="brand">BIKE<span>FLY</span></div><div class="tag">ENTREGAS • HORIZONTE — CE</div></header>
+<main>
+<section class="hero"><div class="eyebrow">Mobilidade urbana • nova experiência</div><h1>Sua entrega, <span>em movimento.</span></h1><p>Uma demonstração visual da BIKEFLY. Escolha como deseja acessar e explore a experiência do cliente ou do entregador.</p></section>
+<div class="panel">
+<section id="home" class="screen active center">
+<h2 class="section-title">Bem-vindo à BIKEFLY</h2><p class="sub">Como você deseja continuar?</p>
+<div class="cards">
+<button class="choice" onclick="go('register-client')"><span class="emoji">📦</span><strong>Sou cliente</strong><small>Quero solicitar uma entrega e acompanhar meus pedidos.</small></button>
+<button class="choice" onclick="go('register-rider')"><span class="emoji">🚴</span><strong>Sou entregador</strong><small>Quero fazer parte da equipe de entregas BIKEFLY.</small></button>
+</div>
+<div class="notice">Esta é uma demonstração de navegação. Nenhum pedido será enviado e nenhum cadastro será salvo.</div>
+</section>
+<section id="register-client" class="screen">
+<div class="topline"><div><h2 class="section-title">Cadastro de cliente</h2><p class="sub">Preencha os dados de exemplo para conhecer o painel.</p></div><span class="pill">CLIENTE</span></div>
+<form onsubmit="event.preventDefault();go('client');">
+<div class="full"><label>Nome completo</label><input required placeholder="Seu nome"></div>
+<div><label>Telefone</label><input required placeholder="(85) 99999-9999"></div><div><label>E-mail</label><input type="email" required placeholder="voce@email.com"></div>
+<div class="full"><label>Endereço</label><input required placeholder="Rua, número e complemento"></div>
+<div class="full"><label>Bairro em Horizonte</label><input required placeholder="Seu bairro"></div>
+<div class="full actions"><button type="submit">Entrar na demonstração</button><button type="button" class="secondary" onclick="go('home')">Voltar</button></div>
+</form>
+</section>
+<section id="register-rider" class="screen">
+<div class="topline"><div><h2 class="section-title">Cadastro de entregador</h2><p class="sub">Conheça a área de quem realiza as entregas.</p></div><span class="pill">ENTREGADOR</span></div>
+<form onsubmit="event.preventDefault();go('rider');">
+<div class="full"><label>Nome completo</label><input required placeholder="Seu nome"></div>
+<div><label>Telefone</label><input required placeholder="(85) 99999-9999"></div><div><label>E-mail</label><input type="email" required placeholder="voce@email.com"></div>
+<div><label>Modelo da bicicleta</label><input placeholder="Ex.: urbana, MTB"></div><div><label>Disponibilidade</label><select><option>Manhã e tarde</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select></div>
+<div class="full notice">A demonstração não habilita ninguém para trabalhar. A idade mínima, os requisitos e as condições legais de atuação precisam ser definidos antes da operação real.</div>
+<div class="full actions"><button type="submit">Ver painel do entregador</button><button type="button" class="secondary" onclick="go('home')">Voltar</button></div>
+</form>
+</section>
+<section id="client" class="screen">
+<div class="topline"><div><h2 class="section-title">Olá, cliente!</h2><p class="sub">O que você precisa enviar hoje?</p></div><span class="pill">ÁREA DO CLIENTE</span></div>
+<div class="dashboard">
+<div class="tile"><h3>Solicitar entrega</h3><p>Informe os pontos de coleta e destino para simular uma solicitação.</p><form style="display:block;margin-top:15px" onsubmit="event.preventDefault();document.getElementById('client-success').style.display='block'"><label>Local de coleta</label><input required placeholder="Onde buscar?"><label style="margin-top:12px">Endereço de entrega</label><input required placeholder="Para onde levar?"><label style="margin-top:12px">O que será entregue?</label><input required placeholder="Ex.: documento, pequeno pacote"><button style="margin-top:15px;width:100%" type="submit">Simular pedido</button></form><div id="client-success" class="success">Pedido demonstrativo criado! Na versão real, aqui apareceria a confirmação e o acompanhamento.</div></div>
+<div class="tile"><h3>Como funciona</h3><ol class="steps"><li>Você informa a coleta e o destino.</li><li>A BIKEFLY encontra um entregador disponível.</li><li>O entregador realiza o percurso.</li><li>Você acompanha o status do pedido.</li></ol></div>
+</div><div class="actions"><button class="secondary" onclick="go('home')">Sair da demonstração</button></div>
+</section>
+<section id="rider" class="screen">
+<div class="topline"><div><h2 class="section-title">Painel do entregador</h2><p class="sub">Sua central de entregas BIKEFLY.</p></div><span class="pill">ENTREGADOR</span></div>
+<div class="dashboard">
+<div class="tile"><h3>Seu status</h3><div class="big">OFFLINE</div><p>Quando a plataforma real estiver pronta, você poderá indicar sua disponibilidade para receber entregas.</p><div class="actions"><button onclick="this.textContent=this.textContent==='Ficar disponível (demo)'?'Ficar indisponível (demo)':'Ficar disponível (demo)'">Ficar disponível (demo)</button></div></div>
+<div class="tile"><h3>Próximos passos</h3><ol class="steps"><li>Completar cadastro e validação.</li><li>Conferir os dados da entrega.</li><li>Aceitar ou recusar uma corrida.</li><li>Retirar e entregar o pedido.</li></ol></div>
+</div><div class="notice">Os pedidos, localização e ganhos exibidos em uma operação real dependerão de integração com servidor, GPS e regras de segurança.</div><div class="actions"><button class="secondary" onclick="go('home')">Sair da demonstração</button></div>
+</section>
+</div>
+</main>
+<footer>BIKEFLY © 2026 • PROTÓTIPO DE DEMONSTRAÇÃO • HORIZONTE — CE</footer>
+<script>
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+</script>
+</body></html>
