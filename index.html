@@ -1,142 +1,186 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BIKEFLY - Mobilidade Inteligente</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIKEFLY</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090b0e;color:#fff;font-family:Arial,sans-serif}
-header{padding:22px;text-align:center;border-bottom:1px solid #444;background:#111}
-.logo{font-size:30px;font-weight:900;letter-spacing:5px}
-.logo span{color:#aeb8c1}
-main{max-width:850px;margin:35px auto;padding:15px}
-.hero{text-align:center;margin-bottom:30px}
-.hero h1{font-size:38px}
-.hero span{color:#aeb8c1}
-.hero p{color:#aaa;line-height:1.6}
-.panel{background:#151a20;border:1px solid #444;border-radius:18px;padding:22px}
-h2{margin-top:0}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-button{padding:15px;border:1px solid #69737d;border-radius:12px;background:#242c34;color:white;font-weight:bold;font-size:15px;cursor:pointer}
-button:hover{background:#414b55}
-.primary{background:#c4cbd2;color:#101418}
-.screen{display:none}
-.active{display:block}
-input,select{width:100%;padding:13px;margin:7px 0 15px;background:#090d11;color:white;border:1px solid #59636c;border-radius:9px}
-label{font-size:13px;color:#cbd1d7}
-.card{padding:17px;background:#0d1217;border:1px solid #424b54;border-radius:12px;margin:10px 0}
-.price{font-size:30px;font-weight:bold;color:#cbd1d7}
-.small{color:#aab2ba;font-size:13px;line-height:1.6}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.notice{padding:12px;background:#282f36;border-radius:9px;color:#cbd1d7;font-size:12px;line-height:1.5;margin-top:15px}
-footer{text-align:center;color:#888;padding:30px;font-size:12px}
-@media(max-width:550px){.grid{grid-template-columns:1fr}.hero h1{font-size:30px}}
+body{margin:0;background:#080808;color:#fff;font-family:Arial,sans-serif}
+header{background:#111;border-bottom:1px solid #aaa;padding:22px;text-align:center}
+.logo{font-size:34px;font-weight:900;letter-spacing:3px;color:#ddd}
+header p{color:#aaa;font-size:12px;letter-spacing:2px}
+main{max-width:520px;margin:auto;padding:20px}
+.card{background:#151515;border:1px solid #444;border-radius:14px;padding:20px;margin:18px 0}
+h2{color:#ddd}
+input,select{width:100%;padding:14px;margin:8px 0;background:#080808;color:white;border:1px solid #555;border-radius:8px;font-size:16px}
+button{width:100%;padding:14px;margin:7px 0;background:#ddd;color:#080808;border:0;border-radius:8px;font-weight:bold;font-size:15px;cursor:pointer}
+button.secondary{background:#333;color:white;border:1px solid #777}
+.small{font-size:13px;color:#aaa;line-height:1.5}
+#status{color:#ddd;overflow-wrap:anywhere}
+footer{text-align:center;color:#777;padding:25px;font-size:12px}
 </style>
 </head>
 <body>
-<header><div class="logo">BIKE<span>FLY</span></div><div class="small">ENTREGAS • TRANSPORTE • MOBILIDADE</div></header>
+<header>
+  <div class="logo">BIKEFLY</div>
+  <p>EM BREVE, EM TODO O BRASIL!</p>
+</header>
+
 <main>
-<div class="hero">
-<p>HORIZONTE — CEARÁ</p>
-<h1>Seu caminho.<br><span>Nosso movimento.</span></h1>
-<p>Conectando clientes, profissionais e comércios em uma nova experiência de mobilidade.</p>
-<strong>EM BREVE, EM TODO O BRASIL!</strong>
-</div>
-<div class="panel">
+  <section class="card">
+    <h2>Bem-vindo à BIKEFLY</h2>
+    <p class="small">Entregas e transporte em um só lugar.</p>
+    <p id="status">Verificando conexão...</p>
+  </section>
 
-<section id="inicio" class="screen active">
-<h2>Bem-vindo à BIKEFLY</h2>
-<p class="small">Escolha como deseja continuar:</p>
-<div class="grid">
-<button onclick="abrir('cliente')">📦 Sou cliente</button>
-<button onclick="abrir('profissional')">🏍️ Quero trabalhar</button>
-<button onclick="abrir('servicos')">⚡ Nossos serviços</button>
-<button onclick="abrir('admin')">🛡️ Administração</button>
-</div>
-</section>
+  <section class="card" id="authCard">
+    <h2>Acesse sua conta</h2>
+    <input id="nome" type="text" placeholder="Seu nome (para cadastro)">
+    <input id="email" type="email" placeholder="Seu e-mail">
+    <input id="senha" type="password" placeholder="Sua senha">
+    <button onclick="cadastrar()">CRIAR CONTA</button>
+    <button class="secondary" onclick="entrar()">ENTRAR</button>
+    <p class="small">Use um e-mail válido e uma senha com pelo menos 6 caracteres.</p>
+  </section>
 
-<section id="cliente" class="screen">
-<h2>Área do cliente</h2>
-<label>Seu nome</label><input id="nome" placeholder="Nome completo">
-<label>Telefone</label><input placeholder="Seu telefone">
-<h3>Qual serviço deseja?</h3>
-<div class="grid">
-<button onclick="tipo('Entrega')">📦 Solicitar entrega</button>
-<button onclick="tipo('Transporte')">🛵 Transporte de passageiro</button>
-</div>
-<div id="pedido" class="card" style="display:none">
-<h3 id="tipo"></h3>
-<label>Local de partida</label><input placeholder="Endereço de coleta/partida">
-<label>Destino</label><input placeholder="Endereço de entrega/destino">
-<label>Pagamento</label>
-<select><option>PIX</option><option>Cartão</option><option>Dinheiro</option></select>
-<button class="primary" onclick="alert('Solicitação demonstrativa! O sistema real ainda precisa de integração.')">Simular solicitação</button>
-</div>
-<button onclick="abrir('inicio')">Voltar</button>
-</section>
+  <section class="card" id="userCard" hidden>
+    <h2>Conta conectada</h2>
+    <p id="userEmail"></p>
+    <button onclick="sair()">SAIR DA CONTA</button>
+  </section>
 
-<section id="profissional" class="screen">
-<h2>Cadastro profissional</h2>
-<p class="small">Faça parte da equipe BIKEFLY.</p>
-<label>Nome completo</label><input placeholder="Seu nome">
-<label>Telefone</label><input placeholder="Seu telefone">
-<label>Veículo</label>
-<select id="veiculo" onchange="veiculoAlterado()">
-<option value="Moto">Motocicleta</option>
-<option value="Bicicleta">Bicicleta</option>
-</select>
-<label>Atividade</label>
-<select id="atividade">
-<option>Entregas</option>
-<option>Entregas e transporte de passageiros</option>
-</select>
-<div class="notice">Todos os profissionais passam por aprovação manual da administração. Bicicletas são destinadas a entregas. Transporte de passageiros depende das exigências legais aplicáveis.</div>
-<button onclick="alert('Cadastro demonstrativo. Aprovação manual necessária na versão real.')">Enviar cadastro demonstrativo</button>
-<button onclick="abrir('inicio')">Voltar</button>
-</section>
+  <section class="card">
+    <h2>Nossos serviços</h2>
+    <p>🏍️ Entregas por motocicleta</p>
+    <p>🚲 Entregas por bicicleta</p>
+    <p>🛵 Transporte de passageiros por motocicleta</p>
+    <p class="small">Serviços sujeitos à disponibilidade e às exigências legais.</p>
+  </section>
 
-<section id="servicos" class="screen">
-<h2>Conheça nossos serviços</h2>
-<div class="card"><h3>📦 Entregas</h3><p class="small">Entregas por bicicleta e motocicleta.</p></div>
-<div class="card"><h3>🏍️ Transporte</h3><p class="small">Transporte de passageiros por motocicleta, sujeito à regulamentação.</p></div>
-<div class="card"><h3>💳 Pagamentos</h3><p class="small">PIX, cartão de crédito/débito e dinheiro.</p></div>
-<div class="card"><h3>🤝 Parceiros comerciais</h3><p class="small">Conectamos comércios e profissionais para movimentar a economia local.</p></div>
-<h3>Comissão da plataforma</h3>
-<div class="price">20%</div>
-<p class="small">Exemplo: serviço de R$ 20,00. BIKEFLY recebe R$ 4,00 e o profissional fica com R$ 16,00, antes dos custos.</p>
-<button onclick="abrir('inicio')">Voltar</button>
-</section>
+  <section class="card">
+    <h2>Seja um profissional</h2>
+    <p class="small">Estamos preparando o cadastro de entregadores e motoristas. A aprovação será manual pela administração.</p>
+  </section>
 
-<section id="admin" class="screen">
-<h2>Painel administrativo</h2>
-<p class="small">Prévia ilustrativa da gestão BIKEFLY.</p>
-<div class="card"><h3>Profissionais</h3><p class="small">Cadastro → análise → aprovação manual → liberação.</p></div>
-<div class="card"><h3>Comissão</h3><div class="price">20%</div><p class="small">Por serviço concluído.</p></div>
-<div class="card"><h3>Operação</h3><p class="small">Entregas • Transporte • PIX • Cartão • Dinheiro.</p></div>
-<div class="notice">Apenas administradores autorizados poderão aprovar profissionais. Este painel não possui autenticação administrativa real.</div>
-<button onclick="abrir('inicio')">Voltar</button>
-</section>
-
-</div>
+  <section class="card">
+    <h2>Taxa da plataforma</h2>
+    <p>Comissão BIKEFLY: <strong>20%</strong></p>
+    <p class="small">Exemplo: serviço de R$ 20,00. Comissão de R$ 4,00.</p>
+    <p class="small">PIX, cartão e dinheiro serão integrados nas próximas etapas.</p>
+  </section>
 </main>
-<footer>BIKEFLY © 2026 — DEMONSTRAÇÃO DO PROJETO</footer>
-<script>
-function abrir(id){
-document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-window.scrollTo(0,0);
+
+<footer>BIKEFLY © 2026 — Mobilidade e entregas</footer>
+
+<script type="module">
+import { createClient } from
+'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://exddfskxqtblsjaixfoh.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_5TfE30sZ-EKYsy97Sp8bBQ_btjciWXx';
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const statusEl = document.getElementById('status');
+const authCard = document.getElementById('authCard');
+const userCard = document.getElementById('userCard');
+
+function mensagem(texto){
+  statusEl.textContent = texto;
 }
-function tipo(t){
-document.getElementById('pedido').style.display='block';
-document.getElementById('tipo').textContent=t;
+
+async function atualizarConta(){
+  const {data:{session}} = await supabase.auth.getSession();
+
+  if(session){
+    authCard.hidden = true;
+    userCard.hidden = false;
+    document.getElementById('userEmail').textContent =
+      'Conectado: ' + session.user.email;
+    mensagem('Sua conta está conectada à BIKEFLY.');
+  }else{
+    authCard.hidden = false;
+    userCard.hidden = true;
+    mensagem('Você ainda não entrou na sua conta.');
+  }
 }
-function veiculoAlterado(){
-let moto=document.getElementById('veiculo').value==='Moto';
-document.getElementById('atividade').innerHTML=moto?
-'<option>Entregas</option><option>Entregas e transporte de passageiros</option>':
-'<option>Entregas</option>';
-}
+
+window.cadastrar = async function(){
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value;
+
+  if(!nome || !email || senha.length < 6){
+    mensagem('Informe seu nome, e-mail e senha com pelo menos 6 caracteres.');
+    return;
+  }
+
+  mensagem('Criando sua conta...');
+
+  const {data,error} = await supabase.auth.signUp({
+    email,
+    password:senha,
+    options:{data:{full_name:nome}}
+  });
+
+  if(error){
+    mensagem('Erro: ' + error.message);
+    return;
+  }
+
+  if(data.session){
+    mensagem('Conta criada! Você já está conectado.');
+  }else{
+    mensagem('Cadastro iniciado! Verifique seu e-mail para confirmar a conta.');
+  }
+
+  await atualizarConta();
+};
+
+window.entrar = async function(){
+  const email = document.getElementById('email').value.trim();
+  const senha = document.getElementById('senha').value;
+
+  if(!email || !senha){
+    mensagem('Informe seu e-mail e sua senha.');
+    return;
+  }
+
+  mensagem('Entrando...');
+
+  const {error} = await supabase.auth.signInWithPassword({
+    email,
+    password:senha
+  });
+
+  if(error){
+    mensagem('Não foi possível entrar: ' + error.message);
+    return;
+  }
+
+  await atualizarConta();
+};
+
+window.sair = async function(){
+  const {error} = await supabase.auth.signOut();
+
+  if(error){
+    mensagem('Erro ao sair: ' + error.message);
+    return;
+  }
+
+  await atualizarConta();
+};
+
+supabase.auth.onAuthStateChange(() => {
+  atualizarConta();
+});
+
+atualizarConta().catch(error => {
+  mensagem('Falha na conexão: ' + error.message);
+});
 </script>
 </body>
 </html>
